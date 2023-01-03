@@ -1,31 +1,30 @@
 import "dotenv/config";
 
 module.exports = {
-    name: "Moje Rośliny",
-    slug: "myplants",
+    name: "Events Planner",
+    slug: "eventsplanner",
     version: "1.0.0",
     privacy: "public",
-    scheme: "com.benmotyka.myplants",
+    scheme: "com.benmotyka.eventsplanner",
     description:
-        "My plants is an application that allows you to track watering of your plants.",
+        "Events Planner is an application that allows you to plan and attend events in your city.",
     orientation: "portrait",
     icon: "./assets/icon.png",
     userInterfaceStyle: "light",
-    // @TODO: add splash screen
     updates: {
         fallbackToCacheTimeout: 0,
     },
     assetBundlePatterns: ["**/*"],
     ios: {
         supportsTablet: true,
-        bundleIdentifier: "com.benmotyka.myplants",
+        bundleIdentifier: "com.benmotyka.eventsplanner",
     },
     android: {
         adaptiveIcon: {
             foregroundImage: "./assets/icons/adaptive.png",
             backgroundColor: "#FFFFFF",
         },
-        package: "com.benmotyka.myplants",
+        package: "com.benmotyka.eventsplanner",
         googleServicesFile: "./keys/google-services.json",
         versionCode: 11,
     },

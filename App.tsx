@@ -13,19 +13,8 @@ import { AkayaKanadaka_400Regular } from "@expo-google-fonts/akaya-kanadaka";
 import * as Sentry from "sentry-expo";
 import { ThemeProvider } from "styled-components/native";
 
-import { sentryDsn } from "config/environment";
-import { RootStackParamList } from "interfaces/RootStackParamList";
 import HomeScreen from "screens/home";
-import AddPlantScreen from "screens/plants/add";
-import EditPlantScreen from "screens/plants/edit";
-import PlantHistoryScreen from "screens/plants/history";
-import SettingsScreen from "screens/settings";
-import ImportPlantScreen from "screens/plants/import";
-import SettingsNotificationsScreen from "screens/settings/notifications";
-import SettingsAppScreen from "screens/settings/app";
-import ToastProvider from "providers/ToastProvider";
 import { darkTheme, lightTheme } from "styles/theme";
-import { useAppConfigStore } from "store";
 import "config/i18n";
 
 Sentry.init({
@@ -50,60 +39,6 @@ export default function App() {
     }
 
     return (
-        <ThemeProvider theme={appTheme === "dark" ? darkTheme : lightTheme}>
-            <RootSiblingParent>
-                <SafeAreaView>
-                    {/* Workaround for devices with native StatusBar */}
-                    <View style={{ paddingTop: NativeStatusBar.currentHeight }}>
-                        <StatusBar />
-                    </View>
-                </SafeAreaView>
-                <NavigationContainer>
-                    <ToastProvider>
-                        <Stack.Navigator
-                            screenOptions={{
-                                headerShown: false,
-                            }}
-                        >
-                            <Stack.Screen
-                                name="home"
-                                component={HomeScreen}
-                                options={{ gestureEnabled: false }}
-                            />
-
-                            <Stack.Screen
-                                name="addPlant"
-                                component={AddPlantScreen}
-                            />
-                            <Stack.Screen
-                                name="editPlant"
-                                component={EditPlantScreen}
-                            />
-                            <Stack.Screen
-                                name="plantHistory"
-                                component={PlantHistoryScreen}
-                            />
-                            <Stack.Screen
-                                name="importPlant"
-                                component={ImportPlantScreen}
-                            />
-
-                            <Stack.Screen
-                                name="settings"
-                                component={SettingsScreen}
-                            />
-                            <Stack.Screen
-                                name="settingsNotifications"
-                                component={SettingsNotificationsScreen}
-                            />
-                            <Stack.Screen
-                                name="settingsApp"
-                                component={SettingsAppScreen}
-                            />
-                        </Stack.Navigator>
-                    </ToastProvider>
-                </NavigationContainer>
-            </RootSiblingParent>
-        </ThemeProvider>
+        
     );
 }
