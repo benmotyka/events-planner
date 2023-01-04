@@ -21,7 +21,7 @@ module.exports = {
     },
     android: {
         adaptiveIcon: {
-            foregroundImage: "./assets/icons/adaptive.png",
+            foregroundImage: "./assets/icons/icon.png",
             backgroundColor: "#FFFFFF",
         },
         package: "com.benmotyka.eventsplanner",
