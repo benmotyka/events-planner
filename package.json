@@ -75,6 +75,7 @@
         "@types/uuid": "^8.3.4",
         "@typescript-eslint/eslint-plugin": "^5.46.1",
         "@typescript-eslint/parser": "^5.46.1",
+        "autoprefixer": "^10.4.13",
         "eslint": "^8.29.0",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-config-airbnb-typescript": "^17.0.0",
@@ -89,6 +90,8 @@
         "eslint-plugin-react": "^7.31.11",
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-native": "^4.0.0",
+        "postcss": "^8.4.20",
+        "postcss-loader": "^7.0.2",
         "prettier": "^2.8.1",
         "react-test-renderer": "^18.2.0",
         "typescript": "^4.9.4"

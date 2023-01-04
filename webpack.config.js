@@ -5,14 +5,14 @@ module.exports = async function (env, argv) {
         {
             ...env,
             babel: {
-                dangerouslyAddModulePathsToTranspile: [
-                    "@miblanchard/react-native-slider",
-                    "moti",
-                ],
+                dangerouslyAddModulePathsToTranspile: ["nativewind"],
             },
         },
         argv
     );
-    config.resolve.alias["framer-motion"] = "framer-motion/dist/framer-motion";
+    config.module.rules.push({
+        test: /\.css$/i,
+        use: ["postcss-loader"],
+    });
     return config;
 };

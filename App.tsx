@@ -1,5 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, View, StatusBar as NativeStatusBar } from "react-native";
+import {
+    SafeAreaView,
+    View,
+    StatusBar as NativeStatusBar,
+    Text,
+} from "react-native";
 import AppLoading from "expo-app-loading";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -12,8 +17,8 @@ import { AkayaKanadaka_400Regular } from "@expo-google-fonts/akaya-kanadaka";
 import HomeScreen from "screens/home";
 import { RootStackParamList } from "interfaces/RootStackParamList";
 import "config/i18n";
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
+import "./styles.css"
 
 export default function App() {
     const [fontsLoaded] = useFonts({
@@ -28,7 +33,7 @@ export default function App() {
 
     return (
         <>
-            <SafeAreaView>
+            {/* <SafeAreaView>
                 <View style={{ paddingTop: NativeStatusBar.currentHeight }}>
                     <StatusBar />
                 </View>
@@ -45,7 +50,10 @@ export default function App() {
                         options={{ gestureEnabled: false }}
                     />
                 </Stack.Navigator>
-            </NavigationContainer>
+            </NavigationContainer> */}
+            <View className="flex-1 items-center justify-center bg-white">
+                <Text>Open up App.js to start working on your app!!</Text>
+            </View>
         </>
     );
 }
