@@ -1,59 +1,14 @@
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-    SafeAreaView,
-    View,
-    StatusBar as NativeStatusBar,
-    Text,
-} from "react-native";
-import AppLoading from "expo-app-loading";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import {
-    useFonts,
-    Inter_200ExtraLight,
-    Inter_300Light,
-} from "@expo-google-fonts/inter";
-import { AkayaKanadaka_400Regular } from "@expo-google-fonts/akaya-kanadaka";
-import HomeScreen from "screens/home";
-import { RootStackParamList } from "interfaces/RootStackParamList";
-import "config/i18n";
-const Stack = createNativeStackNavigator<RootStackParamList>();
-import "./styles.css"
+import { Text, View } from "react-native";
+
+import "./styles";
 
 export default function App() {
-    const [fontsLoaded] = useFonts({
-        Inter_200ExtraLight,
-        Inter_300Light,
-        AkayaKanadaka_400Regular,
-    });
-
-    if (!fontsLoaded) {
-        return <AppLoading />;
-    }
-
-    return (
-        <>
-            {/* <SafeAreaView>
-                <View style={{ paddingTop: NativeStatusBar.currentHeight }}>
-                    <StatusBar />
-                </View>
-            </SafeAreaView>
-            <NavigationContainer>
-                <Stack.Navigator
-                    screenOptions={{
-                        headerShown: false,
-                    }}
-                >
-                    <Stack.Screen
-                        name="home"
-                        component={HomeScreen}
-                        options={{ gestureEnabled: false }}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer> */}
-            <View className="flex-1 items-center justify-center bg-white">
-                <Text>Open up App.js to start working on your app!!</Text>
-            </View>
-        </>
-    );
+  return (
+    <View className="flex-1 items-center justify-center bg-white">
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
 }
