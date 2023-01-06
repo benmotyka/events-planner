@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
 import * as Location from "expo-location";
 
 import "./styles";
@@ -13,6 +13,7 @@ import {
   LONGITUDE_DELTA,
   ZOOM_ANIMATION_SPEED,
 } from "./config";
+import MarkerCallout from "./components/MarkerCallout";
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -53,7 +54,7 @@ export default function App() {
           mapRef.current = map;
         }}
         zoomEnabled={true}
-        style={{ width: "100%", height: "100%" }}
+        className="w-full h-full"
         provider={PROVIDER_GOOGLE}
         initialRegion={{
           latitude: FALLBACK_LATITUDE,
@@ -73,8 +74,9 @@ export default function App() {
         >
           <Image
             source={require("./assets/location-icon.png")}
-            style={{ width: 30, height: 40 }}
+            className="w-[30] h-10"
           />
+          <MarkerCallout />
         </Marker>
       </MapView>
       <StatusBar style="auto" />
