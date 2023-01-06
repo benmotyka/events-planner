@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import * as Location from "expo-location";
 
 import "./styles";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
-import { FALLBACK_LATITUDE, FALLBACK_LONGITUDE, LATITUDE_DELTA, LONGITUDE_DELTA, ZOOM_ANIMATION_SPEED } from "./config";
-
+import {
+  FALLBACK_LATITUDE,
+  FALLBACK_LONGITUDE,
+  LATITUDE_DELTA,
+  LONGITUDE_DELTA,
+  ZOOM_ANIMATION_SPEED,
+} from "./config";
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -64,9 +69,13 @@ export default function App() {
             longitude: FALLBACK_LONGITUDE,
           }}
           draggable={false}
-          // image={{ uri: "custom_pin" }}
           title="test"
-        />
+        >
+          <Image
+            source={require("./assets/location-icon.png")}
+            style={{ width: 30, height: 40 }}
+          />
+        </Marker>
       </MapView>
       <StatusBar style="auto" />
     </View>
