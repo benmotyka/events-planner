@@ -6,17 +6,14 @@ import * as Location from "expo-location";
 import "./styles";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
+import { FALLBACK_LATITUDE, FALLBACK_LONGITUDE, LATITUDE_DELTA, LONGITUDE_DELTA, ZOOM_ANIMATION_SPEED } from "./config";
 
-const FALLBACK_LATITUDE = 50.0412;
-const FALLBACK_LONGITUDE = 21.9991;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = 0.0421;
 
 export default function App() {
   const [location, setLocation] = useState(null);
   const mapRef = useRef<MapView>();
 
-  const getCurrentPosition = async () => {
+  const getCurrentLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== "granted") {
@@ -24,23 +21,26 @@ export default function App() {
       return;
     }
 
-    let location = await Location.getCurrentPositionAsync({
+    return await Location.getCurrentPositionAsync({
       accuracy: Location.Accuracy.Balanced,
     });
-
-    setLocation(location);
-    const region = {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
-    };
-    mapRef.current.animateToRegion(region);
   };
 
   useEffect(() => {
-    getCurrentPosition();
+    getCurrentLocation().then((location) => {
+      setLocation(location);
+      mapRef.current.animateToRegion(
+        {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        },
+        ZOOM_ANIMATION_SPEED
+      );
+    });
   }, []);
+
   return (
     <View className="flex-1 items-center justify-center bg-white">
       <MapView
