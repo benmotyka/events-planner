@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Image, View } from "react-native";
 import * as Location from "expo-location";
+import { trpc } from "./api/client";
 
 import "./styles";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
@@ -15,7 +16,16 @@ import {
 } from "./config";
 import MarkerCallout from "./components/MarkerCallout";
 
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { httpBatchLink } from "@trpc/react-query";
+
 export default function App() {
+  const [queryClient] = useState(() => new QueryClient());
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [httpBatchLink({ url: "http://192.168.1.2:5000/trpc" })],
+    })
+  );
   const [location, setLocation] = useState(null);
   const mapRef = useRef<MapView>();
 
@@ -48,8 +58,10 @@ export default function App() {
   }, []);
 
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <MapView
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <View className="flex-1 items-center justify-center bg-white">
+          <MapView
         ref={(map) => {
           mapRef.current = map;
         }}
@@ -79,7 +91,9 @@ export default function App() {
           <MarkerCallout />
         </Marker>
       </MapView>
-      <StatusBar style="auto" />
-    </View>
+          <StatusBar style="auto" />
+        </View>
+      </QueryClientProvider>
+    </trpc.Provider>
   );
 }
