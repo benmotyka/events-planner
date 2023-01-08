@@ -20,6 +20,6 @@ app.use(
     onError: console.log
   }),
 );
-app.listen(5000, () => console.log('up and running on', 'localhost:5000'));
+app.listen(5678, () => console.log('up and running on', 'localhost:5678'));
 
 export type { AppRouter } from './server'
