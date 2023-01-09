@@ -81,6 +81,8 @@ const HomeScreen = (): JSX.Element => {
                   date={event.date}
                   description={event.description}
                   title={event.title}
+                  usersLimit={event.usersLimit}
+                  activeUsers={event.activeUsers}
                 />
               </Marker>
             ))

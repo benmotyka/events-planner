@@ -29,7 +29,7 @@ export default function App() {
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
-          <View style={{width: 1000, height: 1000}}>
+          <View style={{ width: 1000, height: 1000 }}>
             <Stack.Navigator
               screenOptions={{
                 headerShown: false,

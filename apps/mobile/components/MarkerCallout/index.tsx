@@ -8,11 +8,18 @@ interface Props {
   title: string;
   description: string;
   date: Date;
+  activeUsers: number;
+  usersLimit?: number;
 }
 
-const MarkerCallout = ({ title, description, date }: Props): JSX.Element => {
-  const user = trpc.userById.useQuery("1");
-
+const MarkerCallout = ({
+  title,
+  description,
+  date,
+  activeUsers,
+  usersLimit,
+}: Props): JSX.Element => {
+  
   return (
     <Callout className="w-60 py-2 flex flex-col items-center justify-center">
       <Text className="font-bold text-left">{title}</Text>
@@ -23,10 +30,12 @@ const MarkerCallout = ({ title, description, date }: Props): JSX.Element => {
             source={require("../../assets/clock.png")}
             className="w-4 h-4 mr-1"
           />
-          {/* <Text>{date?.toLocaleDateString('en-US')}</Text> */}
+          {date ? <Text>{date}</Text> : null}
         </View>
         <View className="flex flex-row">
-          <Text>20/40</Text>
+          <Text>
+            {activeUsers}/{usersLimit ? usersLimit : "∞"}
+          </Text>
           <Image
             source={require("../../assets/participants.png")}
             className="w-6 h-4 ml-1"

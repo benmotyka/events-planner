@@ -22,6 +22,8 @@ interface Event {
   createdAt: Date;
   latitude: number;
   longitude: number;
+  usersLimit?: number;
+  activeUsers: number;
 }
 
 const eventList: Event[] = [
@@ -34,6 +36,8 @@ const eventList: Event[] = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
     latitude: 50.0412,
     longitude: 21.9991,
+    activeUsers: 10,
+    usersLimit: 30
   },
   {
     id: "2",
@@ -44,6 +48,7 @@ const eventList: Event[] = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
     latitude: 50.0412,
     longitude: 21.5991,
+    activeUsers: 85,
   },
 ];
 
