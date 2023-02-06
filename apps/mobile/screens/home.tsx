@@ -78,7 +78,7 @@ const HomeScreen = (): JSX.Element => {
                   className="w-[30] h-10"
                 />
                 <MarkerCallout
-                  date={event.date}
+                  date={event.date.toLocaleDateString()}
                   description={event.description}
                   title={event.title}
                   usersLimit={event.usersLimit}

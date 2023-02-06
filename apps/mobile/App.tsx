@@ -10,6 +10,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/react-query";
 import HomeScreen from "./screens/home";
 import { View } from "react-native";
+import SuperJSON from "superjson";
 
 type RootStackParamList = {
   home: undefined;
@@ -20,6 +21,7 @@ export default function App() {
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [httpBatchLink({ url: "http://192.168.1.107:5678/trpc" })],
+      transformer: SuperJSON
     })
   );
 

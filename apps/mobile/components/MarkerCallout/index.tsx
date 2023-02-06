@@ -7,7 +7,7 @@ import { trpc } from "../../api/client";
 interface Props {
   title: string;
   description: string;
-  date: Date;
+  date: string;
   activeUsers: number;
   usersLimit?: number;
 }
@@ -19,7 +19,6 @@ const MarkerCallout = ({
   activeUsers,
   usersLimit,
 }: Props): JSX.Element => {
-  
   return (
     <Callout className="w-60 py-2 flex flex-col items-center justify-center">
       <Text className="font-bold text-left">{title}</Text>
