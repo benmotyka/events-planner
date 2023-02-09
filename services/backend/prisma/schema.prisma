@@ -16,9 +16,32 @@ model Event {
     longitude Float
 
     date      DateTime  @default(now())
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    deletedAt DateTime?
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+
+    usersLimit       Int? @map("users_limit")
+    activeUsersCount Int  @default(0) @map("active_users_count")
 
     @@map("event")
+}
+
+model User {
+    id   String @id @default(uuid())
+    name String
+
+    @@map("user")
+}
+
+model EventUser {
+    id      String @id @default(uuid())
+    userId  String @map("user_id")
+    eventId String @map("event_id")
+
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+
+    @@unique([userId, eventId])
+    @@map("attendance")
 }
