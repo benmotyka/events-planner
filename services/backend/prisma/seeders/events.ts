@@ -10,7 +10,7 @@ const data: Prisma.EventCreateInput[] = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
     latitude: 50.0412,
     longitude: 21.9991,
-    activeUsers: 10,
+    activeUsersCount: 10,
     usersLimit: 30,
   },
   {
@@ -22,7 +22,7 @@ const data: Prisma.EventCreateInput[] = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
     latitude: 50.0412,
     longitude: 21.5991,
-    activeUsers: 85,
+    activeUsersCount: 85,
   },
 ];
 
