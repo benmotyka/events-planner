@@ -15,8 +15,11 @@ config.watchFolders = [workspaceRoot];
 config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, 'node_modules'),
   path.resolve(workspaceRoot, 'node_modules'),
+  
 ];
 // 3. Force Metro to resolve (sub)dependencies only from the `nodeModulesPaths`
 config.resolver.disableHierarchicalLookup = true;
+
+config.resolver.sourceExts = ['jsx', 'js', 'ts', 'tsx', 'cjs'], // add tsx if its not yet defined
 
 module.exports = config;
