@@ -11,6 +11,7 @@ import { httpBatchLink } from "@trpc/react-query";
 import HomeScreen from "./screens/home";
 import { View } from "react-native";
 import SuperJSON from "superjson";
+import Navbar from "./components/Navbar";
 
 type RootStackParamList = {
   home: undefined;
@@ -31,7 +32,6 @@ export default function App() {
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
-          <View style={{ width: 1000, height: 1000 }}>
             <Stack.Navigator
               screenOptions={{
                 headerShown: false,
@@ -43,7 +43,7 @@ export default function App() {
                 options={{ gestureEnabled: false }}
               />
             </Stack.Navigator>
-          </View>
+            <Navbar/>
         </NavigationContainer>
       </QueryClientProvider>
     </trpc.Provider>
