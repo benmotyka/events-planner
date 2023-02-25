@@ -12,14 +12,19 @@ import {
 } from "../config";
 import MarkerCallout from "../components/MarkerCallout";
 import { trpc } from "../api/client";
+import Navbar from "../components/Navbar";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
 
-const HomeScreen = (): JSX.Element => {
+type Props = NativeStackScreenProps<RootStackParamList, "home">;
+
+const HomeScreen = ({ navigation }: Props): JSX.Element => {
   const [location, setLocation] = useState(null);
   const mapRef = useRef<MapView>();
   const { data: events } = trpc.eventList.useQuery();
 
   const getCurrentLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
+    const { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== "granted") {
       alert("Permission to access location was denied");
@@ -46,49 +51,52 @@ const HomeScreen = (): JSX.Element => {
     });
   }, []);
   return (
-    <View className="w-full h-full flex-1 items-center justify-center">
-      <MapView
-        ref={(map) => {
-          mapRef.current = map;
-        }}
-        zoomEnabled={true}
-        className="w-full h-full"
-        provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: FALLBACK_LATITUDE,
-          longitude: FALLBACK_LONGITUDE,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        }}
-      >
-        {events
-          ? events.map((event) => (
-              <Marker
-                key={event.id}
-                identifier={event.id}
-                coordinate={{
-                  latitude: event.latitude,
-                  longitude: event.longitude,
-                }}
-                draggable={false}
-                title={event.title}
-              >
-                <Image
-                  source={require("../assets/location-icon.png")}
-                  className="w-[30] h-10"
-                />
-                <MarkerCallout
-                  date={event.date.toLocaleDateString()}
-                  description={event.description}
+    <>
+      <View className="w-full h-full flex-1 items-center justify-center">
+        <MapView
+          ref={(map) => {
+            mapRef.current = map;
+          }}
+          zoomEnabled={true}
+          className="w-full h-full"
+          provider={PROVIDER_GOOGLE}
+          initialRegion={{
+            latitude: FALLBACK_LATITUDE,
+            longitude: FALLBACK_LONGITUDE,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}
+        >
+          {events
+            ? events.map((event) => (
+                <Marker
+                  key={event.id}
+                  identifier={event.id}
+                  coordinate={{
+                    latitude: event.latitude,
+                    longitude: event.longitude,
+                  }}
+                  draggable={false}
                   title={event.title}
-                  usersLimit={event.usersLimit}
-                  activeUsers={event.activeUsers}
-                />
-              </Marker>
-            ))
-          : null}
-      </MapView>
-    </View>
+                >
+                  <Image
+                    source={require("../assets/location-icon.png")}
+                    className="w-[30] h-10"
+                  />
+                  <MarkerCallout
+                    date={event.date.toLocaleDateString()}
+                    description={event.description}
+                    title={event.title}
+                    usersLimit={event.usersLimit}
+                    activeUsers={event.activeUsersCount}
+                  />
+                </Marker>
+              ))
+            : null}
+        </MapView>
+      </View>
+      <Navbar navigation={navigation} activeScreen="home"/>
+    </>
   );
 };
 

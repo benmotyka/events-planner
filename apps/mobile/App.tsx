@@ -9,12 +9,12 @@ import "./styles";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/react-query";
 import HomeScreen from "./screens/home";
-import { View } from "react-native";
 import SuperJSON from "superjson";
-import Navbar from "./components/Navbar";
+import ExploreScreen from "./screens/explore";
 
-type RootStackParamList = {
+export type RootStackParamList = {
   home: undefined;
+  explore: undefined;
 };
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [httpBatchLink({ url: "http://192.168.1.107:5678/trpc" })],
-      transformer: SuperJSON
+      transformer: SuperJSON,
     })
   );
 
@@ -32,18 +32,22 @@ export default function App() {
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-              }}
-            >
-              <Stack.Screen
-                name="home"
-                component={HomeScreen}
-                options={{ gestureEnabled: false }}
-              />
-            </Stack.Navigator>
-            <Navbar/>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen
+              name="home"
+              component={HomeScreen}
+              options={{ gestureEnabled: false }}
+            />
+             <Stack.Screen
+              name="explore"
+              component={ExploreScreen}
+              options={{ gestureEnabled: false }}
+            />
+          </Stack.Navigator>
         </NavigationContainer>
       </QueryClientProvider>
     </trpc.Provider>
